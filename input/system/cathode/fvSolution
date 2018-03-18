@@ -1,0 +1,185 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    C_H_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    C_H_Csuf
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    C_V_Csuf
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+ 
+    C_O2
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_O2ads
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_O
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_OH
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_H2Oad
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_H2O
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    current_boundary_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    current_boundary_C1
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    current_boundary_C2
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    current_boundary_C3
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    overpotential_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    Phi_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    Efield_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    Efield_bulk_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+
+    C_e_C
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-11;
+        relTol           0;
+    }
+}
+
+relaxationFactors
+{
+
+}
+
+solverControls
+{
+k2C_plus        2.52527e6;//1.1891ev
+k2C_minus       1.819e13;//0ev
+k3C_plus        1.819e13;//0ev
+k3C_minus       1.050496e9;//5.9095e10;//0.43147ev*exp(-2*2.014942)
+k4C_plus        1.819e13;//0ev
+k4C_minus       7829.60937;//7522.606;//1.6271ev*exp(0.04)
+k5C_plus        1.819e13;//0ev
+k5C_minus       1.802788e6;//1.388556e6;//1.23414ev*exp(0.26107)
+k6C_plus        1.819e13;//0ev
+k6C_minus       9.47e7;//0.91616ev//
+ratio_H_C       1e8;
+ratio_O2        1e0;
+ratio_O2ads     1e8;
+ratio_O         1e0;
+ratio_OH        1e1;
+ratio_H2Oad     1e8;
+ratio_H2O       1e0;
+ratio_e_C       5e10;
+}
+
+// ************************************************************************* //

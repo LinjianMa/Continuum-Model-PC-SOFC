@@ -1,0 +1,148 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    C_H_ele
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_V_ele
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    ratio_H_anode
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-10;
+        relTol           0;
+    };
+    ratio_H_cathode
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-10;
+        relTol           0;
+    };
+
+    Phi_ele
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    Efield_ele
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    Efield_bulk
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+
+    charge_HA
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    charge_VA
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    charge_HC
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    charge_VC
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    charge_sumA
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    charge_sumC
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+ 
+    I_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    I_C
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+}
+
+relaxationFactors
+{
+
+}
+
+solverControls
+{
+ratio_H_ele     4e2;
+ratio_V_ele     8e2;
+dH              1e-5;
+dV              1e-5;
+Segeng_V	-0.96;//-0.42;
+Segeng_H	-0.96;//-0.96;
+}
+
+// ************************************************************************* //

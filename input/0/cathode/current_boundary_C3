@@ -1,0 +1,55 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Phi_lc;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0]; 
+
+internalField   uniform   14.48425;  
+
+boundaryField
+{
+    upface
+    {
+        type            zeroGradient;
+    }
+
+    downface
+    {
+	type groovyBC;
+	variables       
+	3
+	(
+	"r_R2T=Area_C*(k2CT_plus*exp(-overpotential_C/0.075307)*C_H_Csuf*(1-C_H_C/Cmax_C) - k2CT_minus*C_H_C/Cmax_C*(1-C_H_Csuf));"
+	"r_R3T=Area_C*ratio_C*(k3CT_plus*exp(-alpha_C*(overpotential_C+0.52474372-0.447825)/0.075307)*C_H_Csuf*C_O*exp(-0.26739/0.075307)/Cmax_C - k3CT_minus*exp((1-alpha_C)*(overpotential_C+0.52474372-0.447825)/0.075307)*C_OH*exp(-0.13884/0.075307)/Cmax_C);"
+	"r_R4T=Area_C*ratio_C*(k4CT_plus*exp(-0.5*(overpotential_C+0.52474372-0.447825)/0.075307)*C_H_Csuf*C_OH*exp(-0.13884/0.075307)/Cmax_C - k4CT_minus*exp((1-0.5)*(overpotential_C+0.52474372-0.447825)/0.075307)*C_H2Oad/Cmax_C);"
+	)
+	;
+	gradientExpression "(r_R4T)*96485";
+	fractionExpression "0";
+	value uniform 0; 
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //

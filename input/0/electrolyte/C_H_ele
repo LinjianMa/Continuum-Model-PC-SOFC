@@ -1,0 +1,68 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Phi_lc;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform   1870.8; //6.766231453e-11;  
+
+boundaryField
+{
+    upface
+    {
+	type groovyBC;
+	variables       
+	2
+	(
+	"Phiup{upface} = Phi_ele;"
+	"Phidown{downface} = Phi_ele;"
+	)
+	;
+	//gradientExpression "10*Efield_bulk*C_H_ele*96485/8.31/873";
+	gradientExpression "ratio_H_cathode*(Efield_bulk*1870.8*96485/8.31/873-I_C/96485/5.275573e-4)";
+	valueExpression "0007";
+	fractionExpression "0";
+	value uniform 1870.8; 
+    }
+
+    downface
+    {
+	type groovyBC;
+	variables       
+	2
+	(
+	"Phiup{upface} = Phi_ele;"
+	"Phidown{downface} = Phi_ele;"
+	)
+	;
+	gradientExpression "-ratio_H_anode*(Efield_bulk*1870.8*96485/8.31/873-I_A/96485/5.275573e-4)";
+	//gradientExpression "-10*(Efield_bulk*C_H_ele*96485/8.31/873)";
+	valueExpression "3748";
+	fractionExpression "0";
+	value uniform 1870.8; 
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //

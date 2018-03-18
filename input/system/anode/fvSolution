@@ -1,0 +1,123 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    C_H2
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_H2ads
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    C_H_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    C_H_Asuf
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+    C_V_Asuf
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+ 
+    current_boundary_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    overpotential_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+    Phi_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    Efield_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+    Efield_bulk_A
+    {
+	solver           PCG;
+        preconditioner   DIC;
+        tolerance        1.3e-12;
+        relTol           0;
+    };
+
+    C_e_A
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-11;
+        relTol           0;
+    }
+
+}
+
+relaxationFactors
+{
+
+}
+
+solverControls
+{
+k1A_plus        1.055789e9;//0.73457ev
+k1A_minus       1.819e13;//0ev
+k2A_plus        1.819e13;//0ev
+k2A_minus       6.838085e9;//0.59388ev
+ratio_H2        5e8;
+ratio_H2ads     5e15;
+ratio_H_A       5e8;
+ratio_e_A       5e10;
+}
+
+// ************************************************************************* //

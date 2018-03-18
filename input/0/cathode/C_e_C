@@ -1,0 +1,54 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Phi_lc;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform   97342; 
+
+boundaryField
+{
+    upface
+    {
+	type groovyBC;
+	gradientExpression "-3*Efield_bulk_C*97342*96485/8.31/873";
+	fractionExpression "1";
+	valueExpression "97342";
+        //valueExpression "C_e_C-0.1*Efield_bulk_C";
+	value uniform 97342; 
+    }
+
+    downface
+    {
+	type groovyBC;
+	gradientExpression "3*Efield_bulk_C*97342*96485/8.31/873";
+	fractionExpression "0";
+	valueExpression "87342";
+        //valueExpression "C_e_C+0.1*Efield_bulk_C";
+	value uniform 97342; 
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //

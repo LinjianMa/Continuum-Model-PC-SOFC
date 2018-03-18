@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Phi_lc;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform   2.8719989e-11; //6.766231453e-11;  
+
+boundaryField
+{
+    upface
+    {
+        type            zeroGradient;
+    }
+
+    downface
+    {
+	type groovyBC;
+	variables "r_R2T=Area_C*(k2CT_plus*exp(-overpotential_C/0.075307)*C_H_Csuf/83147*(1-C_H_C/Cmax_C) - k2CT_minus*C_H_C/Cmax_C*(1-C_H_Csuf/83147));";
+	//gradientExpression "0";
+	gradientExpression "(r_R2T)/D_H_C";
+	fractionExpression "0";
+	value uniform 0; 
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //

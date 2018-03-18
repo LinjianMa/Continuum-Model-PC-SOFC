@@ -1,0 +1,58 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Phi_lc;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0]; 
+
+internalField   uniform   0;  
+
+boundaryField
+{
+    downface
+    {
+        type            zeroGradient;
+    }
+
+    upface
+    {
+	type groovyBC;
+	variables       
+	3
+	(
+	"r_R1T=Area_A*(k1AT_plus*C_H2/Cmax_A - k1AT_minus*C_H2ads/Cmax_A);"
+	"r_R2T=Area_A*(k2AT_plus*C_H2ads/Cmax_A - k2AT_minus*C_H_A/Cmax_A*C_H_A/Cmax_A);"
+	//"r_R3T=Area_A*ratio_A*(k3AT_plus*exp(-alpha_A*(overpotential_A+0.488269388)/0.075307)*C_H_A/Cmax_A - k3AT_minus*exp((1-alpha_A)*(overpotential_A+0.488269388)/0.075307)*C_H_Asuf/83147);"
+	"r_R3T=Area_A*ratio_A*(k3AT_plus*exp(-alpha_A*(overpotential_A-0.55)/0.075307)*C_H_A/Cmax_A - k3AT_minus*exp((1-alpha_A)*(overpotential_A-0.55)/0.075307)*C_H_Asuf/83147);"	
+	)
+	;
+	gradientExpression "0";
+	//valueExpression "overpotential_A";
+	valueExpression "r_R3T*96485";
+	fractionExpression "1";
+	value uniform 0; 
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //

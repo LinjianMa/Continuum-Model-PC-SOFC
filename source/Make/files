@@ -1,0 +1,3 @@
+BZYsolve.C
+
+EXE = $(FOAM_APPBIN)/BZYsolve

@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Phi_lc;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform   0.605104258;//0.08067742292;   *exp(2.014942)
+
+boundaryField
+{
+    upface
+    {
+        type            zeroGradient;
+    }
+
+    downface
+    {
+	type groovyBC;
+	variables
+	2
+	(
+	//"r_R3T=Area_C*ratio_C*(k3CT_plus*exp(-alpha_C*(overpotential_C+0.52474372-0.447825)/0.075307)*C_H_Csuf*C_O*exp(-0.26739/0.075307)/Cmax_C - k3CT_minus*exp((1-alpha_C)*(overpotential_C+0.52474372-0.447825)/0.075307)*C_OH*exp(-0.13884/0.075307)/Cmax_C);"
+	"r_R3T=Area_C*ratio_C*(k3CT_plus*exp(-alpha_C*overpotential_C/0.075307)*C_H_Csuf/83147*C_O*exp(-0.26739/0.075307)/Cmax_C - k3CT_minus*exp((1-alpha_C)*overpotential_C/0.075307)*C_OH*exp(-0.13884/0.075307)/Cmax_C);"
+	"r_R6T=Area_C*(k6CT_plus*C_O2ads/Cmax_C - k6CT_minus*C_O*exp(-0.26739/0.075307)/Cmax_C*C_O*exp(-0.26739/0.075307)/Cmax_C);"
+	)
+	;
+	//gradientExpression "0";
+	gradientExpression "(-r_R3T+2*r_R6T)/D_O";
+	//gradientExpression "(2*Area_C*k6T_plus*C_O2ads/Cmax)/D_O";
+	fractionExpression "0";
+	value uniform 0; 
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+// ************************************************************************* //

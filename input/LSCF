@@ -1,0 +1,19 @@
+#PBS -A baca
+#PBS -q low
+#PBS -l nodes=1:ppn=1:xk
+#PBS -l walltime=06:00:00
+#PBS -N LSCF_high
+#PBS -e $PBS_JOBID.err
+#PBS -o $PBS_JOBID.out
+#PBS -m bea
+#PBS -M lma16@illinois.edu
+
+module swap PrgEnv-cray PrgEnv-gnu
+module add cmake
+module add boost
+. /opt/modules/default/init/bash
+
+cd $PBS_O_WORKDIR
+source /u/sciteam/ma4/OpenFOAM/OpenFOAM-2.4.0/etc/bashrc
+
+aprun -n 1 BZYsolve > CoT.out
